@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ConSySencI.A — Otimização de Vendas</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#070b11;
+      --text:#eaeaea;
+      --muted:#9aa4af;
+      --card:rgba(255,255,255,.04);
+      --border:rgba(255,255,255,.09);
+      --blue:#4da3ff;
+      --gold:#f5c56b;
+      --gradient:linear-gradient(135deg,#4da3ff,#f5c56b);
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(900px 500px at 15% 0%, rgba(77,163,255,.16), transparent 60%),
+        radial-gradient(900px 500px at 85% 20%, rgba(245,197,107,.14), transparent 60%),
+        radial-gradient(circle at top, #0e1623, #070b11);
+      color:var(--text);
+      line-height:1.55;
+      overflow-x:hidden;
+    }
+
+    .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+    header{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(7,11,17,.65);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:18px 0;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      font-weight:700;letter-spacing:.2px
+    }
+    .dot{
+      width:14px;height:14px;border-radius:5px;background:var(--gradient);
+      box-shadow:0 0 20px rgba(77,163,255,.35);
+    }
+    .brand span{
+      background:var(--gradient);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+
+    .nav-links{
+      display:flex;gap:18px;align-items:center;
+    }
+    .nav-links a{
+      color:var(--muted);text-decoration:none;font-weight:500;font-size:14px;
+      padding:8px 10px;border-radius:10px;
+    }
+    .nav-links a:hover{background:rgba(255,255,255,.04);color:var(--text)}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:14px 22px;border-radius:14px;font-weight:700;
+      text-decoration:none;transition:.25s;gap:10px;
+      border:1px solid transparent;
+      user-select:none;
+    }
+    .btn-primary{background:var(--gradient);color:#000}
+    .btn-primary:hover{transform:translateY(-1px);filter:saturate(1.05)}
+    .btn-ghost{background:transparent;border-color:var(--border);color:var(--text)}
+    .btn-ghost:hover{background:rgba(255,255,255,.04)}
+    .pill{
+      display:inline-flex;gap:10px;align-items:center;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      padding:10px 14px;border-radius:999px;
+      color:var(--muted);font-size:13px;font-weight:600;
+      width:fit-content;
+    }
+    .spark{
+      width:10px;height:10px;border-radius:999px;background:var(--gradient);
+      box-shadow:0 0 18px rgba(245,197,107,.25);
+    }
+
+    /* HERO */
+    .hero{
+      padding:68px 0 30px;
+      position:relative;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:34px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns:1fr;gap:22px}
+      .nav-links{display:none}
+    }
+    h1{
+      font-size:clamp(34px,4.2vw,56px);
+      line-height:1.08;
+      letter-spacing:-.02em;
+      margin-top:14px;
+    }
+    h1 .grad{
+      background:var(--gradient);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .lead{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:18px;
+      max-width:620px;
+    }
+    .cta-row{
+      display:flex;flex-wrap:wrap;gap:12px;
+      margin-top:22px;
+    }
+    .trust-row{
+      display:flex;flex-wrap:wrap;gap:10px;
+      margin-top:18px;
+      color:rgba(154,164,175,.9);
+      font-size:13px;
+    }
+    .trust-chip{
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      padding:8px 10px;border-radius:999px;
+    }
+
+    /* RIGHT PANEL */
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:24px;
+      padding:26px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .panel:before{
+      content:"";
+      position:absolute;inset:-40px -60px auto auto;
+      width:220px;height:220px;border-radius:999px;
+      background: radial-gradient(circle, rgba(77,163,255,.20), transparent 60%);
+      filter: blur(2px);
+    }
+    .panel h3{font-size:16px;color:rgba(255,255,255,.92)}
+    .panel p{color:var(--muted);font-size:14px;margin-top:8px}
+    .kpi{
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:12px;margin-top:18px;
+    }
+    .kpi .box{
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;padding:14px;
+    }
+    .kpi .num{
+      font-weight:800;font-size:20px;
+      background:var(--gradient);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .kpi .lbl{color:var(--muted);font-size:12px;margin-top:6px}
+
+    .pricebox{
+      margin-top:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.25);
+      border-radius:22px;
+      padding:18px;
+    }
+    .pricebox .top{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+    }
+    .tag{
+      font-size:12px;font-weight:800;letter-spacing:.08em;
+      color:#000;background:var(--gradient);
+      padding:8px 10px;border-radius:999px;
+    }
+    .value{
+      font-size:40px;font-weight:900;letter-spacing:-.02em;
+      background:var(--gradient);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .sub{
+      margin-top:6px;color:var(--muted);font-size:13px
+    }
+    .panel .btn{width:100%;margin-top:14px}
+
+    /* SECTIONS */
+    section{padding:56px 0}
+    .section-title{
+      font-size:28px;letter-spacing:-.01em;
+    }
+    .section-sub{
+      color:var(--muted);margin-top:8px;max-width:720px
+    }
+
+    .grid3{
+      display:grid;grid-template-columns:repeat(3,1fr);
+      gap:18px;margin-top:26px;
+    }
+    @media (max-width: 900px){ .grid3{grid-template-columns:1fr} }
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:22px;
+      padding:22px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.25);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:after{
+      content:"";
+      position:absolute;inset:auto -40px -60px auto;
+      width:180px;height:180px;border-radius:999px;
+      background: radial-gradient(circle, rgba(245,197,107,.16), transparent 60%);
+      filter: blur(2px);
+    }
+    .card h4{font-size:18px}
+    .card p{color:var(--muted);margin-top:8px;font-size:14px}
+
+    .list{
+      margin-top:18px;
+      display:grid;gap:12px;
+    }
+    .li{
+      display:flex;gap:12px;align-items:flex-start;
+      padding:14px 14px;border-radius:16px;
+      border:1px solid rgba(255,255,255,.07);
+      background:rgba(255,255,255,.03);
+    }
+    .ico{
+      width:22px;height:22px;border-radius:7px;background:var(--gradient);
+      flex:0 0 22px;margin-top:2px;
+      box-shadow:0 0 18px rgba(77,163,255,.18);
+    }
+    .li b{display:block}
+    .li span{color:var(--muted);font-size:14px}
+
+    /* Comparison */
+    .compare{
+      margin-top:24px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      border-radius:24px;
+      overflow:hidden;
+    }
+    .compare-head{
+      padding:18px 18px;
+      display:grid;grid-template-columns:1fr 1fr;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      color:rgba(255,255,255,.85);
+      font-weight:800;
+    }
+    .compare-rows{
+      display:grid;grid-template-columns:1fr 1fr;
+    }
+    .cell{
+      padding:16px 18px;
+      border-right:1px solid rgba(255,255,255,.06);
+      border-bottom:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:14px;
+    }
+    .compare-rows .cell:nth-child(2n){border-right:none}
+    .good{color:#c9ffd7}
+    .bad{color:#ffd0d0}
+
+    /* FAQ */
+    details{
+      border:1px solid rgba(255,255,255,.09);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;
+      padding:16px 16px;
+    }
+    details summary{
+      cursor:pointer;
+      font-weight:800;
+      color:rgba(255,255,255,.92);
+      list-style:none;
+    }
+    details p{color:var(--muted);margin-top:10px;font-size:14px}
+    details + details{margin-top:12px}
+
+    /* Final CTA */
+    .final{
+      padding:70px 0 90px;
+    }
+    .final-box{
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius:28px;
+      padding:30px;
+      box-shadow:var(--shadow);
+      display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center;
+    }
+    @media (max-width:900px){ .final-box{grid-template-columns:1fr} }
+    .final-box h3{font-size:26px;line-height:1.1}
+    .final-box h3 span{
+      background:var(--gradient);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .final-box p{color:var(--muted);margin-top:10px}
+    .mini{
+      border:1px solid rgba(255,255,255,.09);
+      background:rgba(0,0,0,.22);
+      border-radius:22px;
+      padding:18px;
+      text-align:center;
+    }
+    .mini .value{font-size:46px}
+    .mini .btn{width:100%;margin-top:12px}
+
+    footer{
+      border-top:1px solid rgba(255,255,255,.06);
+      padding:26px 0;
+      color:#6b7280;
+      font-size:13px;
+      text-align:center;
+    }
+
+    /* Mobile sticky buy bar */
+    .buybar{
+      position:fixed;left:0;right:0;bottom:0;z-index:60;
+      padding:10px 14px;
+      background: rgba(7,11,17,.82);
+      border-top:1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(10px);
+      display:none;
+    }
+    .buybar .in{
+      max-width:1120px;margin:0 auto;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .buybar .txt{color:rgba(255,255,255,.88);font-weight:800;font-size:13px}
+    .buybar .sub{margin:0;color:var(--muted);font-size:12px}
+    .buybar .btn{padding:12px 16px;border-radius:14px}
+    @media (max-width:900px){ .buybar{display:block} body{padding-bottom:72px} }
+
+    /* subtle motion */
+    @keyframes floaty { 0%{transform:translateY(0)} 50%{transform:translateY(-6px)} 100%{transform:translateY(0)} }
+    .panel{animation: floaty 6s ease-in-out infinite}
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>ConSySenc<span>I.A</span></div>
+        </div>
+
+        <div class="nav-links">
+          <a href="#o-que-muda">O que muda</a>
+          <a href="#o-que-recebe">O que recebe</a>
+          <a href="#faq">Dúvidas</a>
+        </div>
+
+        <a class="btn btn-primary" href="https://pay.kiwify.com.br/bikS3bE">Ativar otimização</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="pill"><span class="spark"></span> Nível 2 • Otimização de Vendas</div>
+
+          <h1>Transforme “tentativa e erro” em <span class="grad">processo que vende</span>.</h1>
+          <p class="lead">
+            Você já ativou o ConSySencI.A. Agora vem o passo que separa quem brinca de vender
+            de quem monta uma operação: <b>otimizar o funil, a mensagem e a decisão do cliente</b>.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://pay.kiwify.com.br/bikS3bE">Ativar por R$97</a>
+            <a class="btn btn-ghost" href="#o-que-muda">Ver o que muda na prática</a>
+          </div>
+
+          <div class="trust-row">
+            <div class="trust-chip">Pagamento único • acesso imediato</div>
+            <div class="trust-chip">Sem promessas mágicas</div>
+            <div class="trust-chip">Foco: clareza → conversão</div>
+          </div>
+        </div>
+
+        <aside class="panel">
+          <h3>O que você destrava nesse nível</h3>
+          <p>Uma camada acima do “ativar”: você cria consistência, previsibilidade e melhoria contínua.</p>
+
+          <div class="kpi">
+            <div class="box">
+              <div class="num">+Clareza</div>
+              <div class="lbl">o cliente entende mais rápido</div>
+            </div>
+            <div class="box">
+              <div class="num">+Conversão</div>
+              <div class="lbl">menos atrito no “fechar”</div>
+            </div>
+            <div class="box">
+              <div class="num">+Controle</div>
+              <div class="lbl">você sabe o que ajustar</div>
+            </div>
+            <div class="box">
+              <div class="num">+Evolução</div>
+              <div class="lbl">o sistema aprende com você</div>
+            </div>
+          </div>
+
+          <div class="pricebox">
+            <div class="top">
+              <div>
+                <div style="font-weight:900">ConSySencI.A — Otimização</div>
+                <div class="sub">Nível 2 • Pagamento único</div>
+              </div>
+              <div class="tag">ACESSO</div>
+            </div>
+            <div class="value">R$ 97</div>
+            <div class="sub">Acesso imediato ao nível 2 dentro da área de membros.</div>
+            <a class="btn btn-primary" href="https://pay.kiwify.com.br/bikS3bE">Ativar agora</a>
+            <a class="btn btn-ghost" href="#o-que-recebe">Ver conteúdos</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- WHAT CHANGES -->
+  <section id="o-que-muda">
+    <div class="wrap">
+      <div class="section-title">O que muda na prática?</div>
+      <div class="section-sub">
+        Nesse nível você para de “mandar mensagem e torcer” e começa a operar com lógica:
+        <b>estrutura → abordagem → ajuste → escala</b>.
+      </div>
+
+      <div class="compare">
+        <div class="compare-head">
+          <div>Antes (Nível 1)</div>
+          <div>Depois (Nível 2)</div>
+        </div>
+        <div class="compare-rows">
+          <div class="cell bad">Você tem o sistema, mas fica inseguro no que falar e quando falar.</div>
+          <div class="cell good">Você usa roteiros e gatilhos com intenção: cada mensagem tem um objetivo.</div>
+
+          <div class="cell bad">O cliente demora a decidir e some no meio do caminho.</div>
+          <div class="cell good">Você reduz atrito e aumenta resposta com follow-ups inteligentes.</div>
+
+          <div class="cell bad">Você não sabe o que ajustar quando a conversão cai.</div>
+          <div class="cell good">Você mede por sinais: onde trava, por quê trava e o que corrigir.</div>
+
+          <div class="cell bad">Você depende de inspiração e “força de vontade”.</div>
+          <div class="cell good">Você roda um processo repetível que melhora com o tempo.</div>
+        </div>
+      </div>
+
+      <div class="grid3" style="margin-top:22px">
+        <div class="card">
+          <h4>Mensagem que conduz</h4>
+          <p>Estruturas de conversa que fazem o cliente avançar sem parecer pressão.</p>
+        </div>
+        <div class="card">
+          <h4>Oferta que faz sentido</h4>
+          <p>Você aprende a mostrar valor antes do preço — e o “sim” vira consequência.</p>
+        </div>
+        <div class="card">
+          <h4>Otimização contínua</h4>
+          <p>O sistema evolui com base no que funciona, não em achismo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section id="o-que-recebe">
+    <div class="wrap">
+      <div class="section-title">O que você recebe nesse nível</div>
+      <div class="section-sub">
+        Conteúdos e estruturas para colocar o ConSySencI.A em “modo operação”:
+        mais clareza, mais conversão, mais consistência.
+      </div>
+
+      <div class="list">
+        <div class="li">
+          <div class="ico"></div>
+          <div>
+            <b>Arquitetura de Conversa (WhatsApp)</b>
+            <span>Início → diagnóstico → proposta → fechamento. Sem travar no meio.</span>
+          </div>
+        </div>
+        <div class="li">
+          <div class="ico"></div>
+          <div>
+            <b>Follow-up inteligente</b>
+            <span>Sem parecer chato: retomadas curtas que recuperam vendas.</span>
+          </div>
+        </div>
+        <div class="li">
+          <div class="ico"></div>
+          <div>
+            <b>Gatilhos de decisão (sem hype)</b>
+            <span>Prova, clareza e urgência elegante aplicadas com lógica.</span>
+          </div>
+        </div>
+        <div class="li">
+          <div class="ico"></div>
+          <div>
+            <b>Roteiros prontos (copiar e colar)</b>
+            <span>Mensagens-chave para os momentos mais críticos da conversa.</span>
+          </div>
+        </div>
+        <div class="li">
+          <div class="ico"></div>
+          <div>
+            <b>Checklist de conversão</b>
+            <span>Diagnóstico rápido do que está faltando quando não vende.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-row" style="margin-top:22px">
+        <a class="btn btn-primary" href="https://pay.kiwify.com.br/bikS3bE">Ativar Nível 2 por R$97</a>
+        <a class="btn btn-ghost" href="#pra-quem">Pra quem é?</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR WHO -->
+  <section id="pra-quem">
+    <div class="wrap">
+      <div class="section-title">Pra quem é (e pra quem não é)</div>
+      <div class="section-sub">Isso aqui é pra quem quer resultado real e evolução consistente.</div>
+
+      <div class="grid3">
+        <div class="card">
+          <h4>É pra você se…</h4>
+          <p>Você já entrou no sistema e quer parar de depender de “tentativa e erro”.</p>
+          <div style="margin-top:14px;color:var(--muted);font-size:14px">
+            ✅ Quer processo <br>✅ Quer clareza <br>✅ Quer melhorar conversão
+          </div>
+        </div>
+
+        <div class="card">
+          <h4>Não é pra você se…</h4>
+          <p>Você quer “dinheiro fácil” ou uma promessa que ignora a realidade.</p>
+          <div style="margin-top:14px;color:var(--muted);font-size:14px">
+            ❌ Quer mágica <br>❌ Não aplica nada <br>❌ Desiste rápido
+          </div>
+        </div>
+
+        <div class="card">
+          <h4>Melhor momento</h4>
+          <p>Quando você percebeu que o Nível 1 funciona, mas quer consistência e velocidade.</p>
+          <div style="margin-top:14px" class="pill"><span class="spark"></span> Otimizar antes de escalar</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-title">Dúvidas rápidas</div>
+      <div class="section-sub">Respostas diretas — sem enrolação.</div>
+
+      <div style="margin-top:18px">
+        <details>
+          <summary>Eu vou ter acesso imediato?</summary>
+          <p>Sim. Assim que confirmar o pagamento, você entra no conteúdo do Nível 2 na área de membros.</p>
+        </details>
+
+        <details>
+          <summary>Isso é assinatura?</summary>
+          <p>Não. Esse nível é pagamento único (R$97) e libera o conteúdo de otimização.</p>
+        </details>
+
+        <details>
+          <summary>Eu preciso ter “experiência” pra aplicar?</summary>
+          <p>Não. O foco é transformar sua execução em processo: passo a passo, com roteiros e checklists.</p>
+        </details>
+
+        <details>
+          <summary>O que acontece depois do Nível 2?</summary>
+          <p>Quando você estiver pronto, o próximo passo é o Nível Pro (operação e escala).</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final">
+    <div class="wrap">
+      <div class="final-box">
+        <div>
+          <h3>Se você quer que o sistema <span>venda melhor</span>, esse é o nível.</h3>
+          <p>
+            Otimize agora e suba com base em lógica — não em emoção.
+            Você está construindo uma operação, não só “testando”.
+          </p>
+        </div>
+
+        <div class="mini">
+          <div style="font-weight:900">Nível 2 • Otimização</div>
+          <div class="value">R$ 97</div>
+          <div class="sub">Pagamento único • Acesso imediato</div>
+          <a class="btn btn-primary" href="https://pay.kiwify.com.br/bikS3bE">Ativar agora</a>
+          <a class="btn btn-ghost" href="#o-que-recebe">Ver o que recebe</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 ConSySencI.A — Todos os direitos reservados
+  </footer>
+
+  <!-- Mobile Buy Bar -->
+  <div class="buybar">
+    <div class="in">
+      <div>
+        <div class="txt">Nível 2 • Otimização</div>
+        <div class="sub">R$ 97 • acesso imediato</div>
+      </div>
+      <a class="btn btn-primary" href="https://pay.kiwify.com.br/bikS3bE">Ativar</a>
+    </div>
+  </div>
+</body>
+</html>
