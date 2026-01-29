@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ConSySencI.A Pro — Operação Profissional</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#070b11;
+      --bg2:#0b1220;
+      --text:#eef2f7;
+      --muted:#a4adba;
+
+      --card:rgba(255,255,255,.04);
+      --card2:rgba(255,255,255,.06);
+      --border:rgba(255,255,255,.09);
+      --border2:rgba(255,255,255,.12);
+
+      --blue:#4da3ff;
+      --gold:#f5c56b;
+      --gradient:linear-gradient(135deg,#4da3ff,#f5c56b);
+
+      --shadow: 0 24px 70px rgba(0,0,0,.50);
+      --shadow2: 0 18px 50px rgba(0,0,0,.34);
+
+      --ok:#35d07f;
+      --warn:#ffb703;
+      --danger:#ff6b6b;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1100px 700px at 12% 0%, rgba(77,163,255,.16), transparent 60%),
+        radial-gradient(1100px 700px at 88% 10%, rgba(245,197,107,.14), transparent 60%),
+        radial-gradient(1200px 800px at 50% 115%, rgba(77,163,255,.09), transparent 55%),
+        linear-gradient(180deg, var(--bg) 0%, #070b14 100%);
+      color:var(--text);
+      line-height:1.55;
+      overflow-x:hidden;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+    section{padding:60px 0}
+    .section-title{font-size:30px;letter-spacing:-.01em}
+    .section-sub{color:var(--muted);margin-top:10px;max-width:820px;font-size:15.5px}
+
+    /* Topbar */
+    header{
+      position:sticky;top:0;z-index:60;
+      backdrop-filter: blur(12px);
+      background: rgba(7,11,17,.70);
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:16px 0;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      font-weight:900;letter-spacing:.2px;
+    }
+    .mark{
+      width:38px;height:38px;border-radius:14px;
+      background: var(--gradient);
+      box-shadow: 0 0 28px rgba(77,163,255,.25), 0 0 28px rgba(245,197,107,.18);
+    }
+    .brand span{
+      background:var(--gradient);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .nav-links{display:flex;gap:16px;align-items:center}
+    .nav-links a{
+      color:var(--muted);font-weight:700;font-size:13.5px;
+      padding:8px 10px;border-radius:12px;
+      border:1px solid transparent;
+    }
+    .nav-links a:hover{
+      color:var(--text);
+      background: rgba(255,255,255,.03);
+      border-color: rgba(255,255,255,.06);
+    }
+    @media (max-width: 980px){ .nav-links{display:none} }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:14px 20px;border-radius:14px;
+      font-weight:900;white-space:nowrap;
+      border:1px solid transparent;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, filter .18s ease;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-primary{
+      background: var(--gradient);
+      color:#0a0f18;
+      box-shadow: 0 18px 45px rgba(77,163,255,.15), 0 18px 45px rgba(245,197,107,.12);
+    }
+    .btn-primary:hover{transform:translateY(-1px);filter:saturate(1.05)}
+    .btn-ghost{
+      background: rgba(255,255,255,.03);
+      border-color: rgba(255,255,255,.10);
+      color:var(--text);
+    }
+    .btn-ghost:hover{background: rgba(255,255,255,.06); transform:translateY(-1px)}
+    .btn:active{transform:translateY(0) scale(.99)}
+
+    /* Hero */
+    .hero{padding:66px 0 28px}
+    .hero-grid{
+      display:grid;grid-template-columns: 1.1fr .9fr;
+      gap:30px;align-items:stretch;
+    }
+    @media (max-width: 980px){ .hero-grid{grid-template-columns:1fr;gap:18px} }
+
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:999px;
+      background: rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--muted);font-weight:800;font-size:13px;
+      width:fit-content;
+    }
+    .spark{
+      width:10px;height:10px;border-radius:999px;
+      background: var(--gradient);
+      box-shadow:0 0 20px rgba(245,197,107,.20);
+    }
+
+    h1{
+      margin-top:14px;
+      font-size:clamp(36px, 4.3vw, 58px);
+      line-height:1.04;
+      letter-spacing:-.03em;
+    }
+    .grad{
+      background: var(--gradient);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .lead{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:18px;
+      max-width:720px;
+    }
+
+    .cta-row{
+      display:flex;flex-wrap:wrap;gap:12px;
+      margin-top:22px;
+    }
+
+    .trust{
+      display:flex;flex-wrap:wrap;gap:10px;
+      margin-top:18px;color:rgba(164,173,186,.92);
+      font-size:13px;
+    }
+    .chip{
+      padding:9px 11px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+    }
+
+    /* Side panel */
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:26px;
+      padding:26px;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+      isolation:isolate;
+    }
+    .panel:before{
+      content:"";
+      position:absolute;
+      inset:-80px -120px auto auto;
+      width:320px;height:320px;border-radius:999px;
+      background: radial-gradient(circle, rgba(77,163,255,.20), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+      filter: blur(2px);
+    }
+    .panel:after{
+      content:"";
+      position:absolute;
+      inset:auto auto -120px -120px;
+      width:360px;height:360px;border-radius:999px;
+      background: radial-gradient(circle, rgba(245,197,107,.15), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+      filter: blur(2px);
+    }
+    .panel > *{position:relative}
+
+    .panel h3{font-size:16px;font-weight:900}
+    .panel p{color:var(--muted);font-size:14px;margin-top:8px}
+
+    .kpi{
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:12px;margin-top:16px;
+    }
+    .kpi .box{
+      border:1px solid rgba(255,255,255,.09);
+      background: rgba(0,0,0,.22);
+      border-radius:18px;
+      padding:14px;
+    }
+    .kpi .num{
+      font-weight:950;font-size:14px;
+      background: var(--gradient);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .kpi .lbl{color:var(--muted);font-size:12px;margin-top:6px}
+
+    .offer{
+      margin-top:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.26);
+      border-radius:22px;
+      padding:16px;
+    }
+    .offer .row{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+    }
+    .tag{
+      font-size:12px;font-weight:950;letter-spacing:.08em;
+      background: var(--gradient);
+      color:#0b1020;
+      padding:8px 10px;border-radius:999px;
+      flex:0 0 auto;
+    }
+    .offer .price{
+      margin-top:10px;
+      font-size:44px;font-weight:950;letter-spacing:-.03em;
+      background: var(--gradient);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .offer .meta{color:var(--muted);font-size:13px;margin-top:4px}
+    .offer .btn{width:100%;margin-top:12px}
+
+    /* Cards */
+    .grid3{
+      display:grid;grid-template-columns:repeat(3, 1fr);
+      gap:16px;margin-top:24px;
+    }
+    @media (max-width: 980px){ .grid3{grid-template-columns:1fr} }
+    .card{
+      background: var(--card);
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:24px;
+      padding:22px;
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+      min-height: 170px;
+    }
+    .card:after{
+      content:"";
+      position:absolute;right:-60px;bottom:-80px;
+      width:220px;height:220px;border-radius:999px;
+      background: radial-gradient(circle, rgba(245,197,107,.14), transparent 60%);
+      filter: blur(2px);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .card h4{font-size:18px;font-weight:950}
+    .card p{color:var(--muted);margin-top:10px;font-size:14.5px}
+
+    /* Story / quote */
+    .story{
+      display:grid;grid-template-columns: 1.1fr .9fr;
+      gap:16px;margin-top:22px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){ .story{grid-template-columns:1fr} }
+
+    .quote{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:26px;
+      padding:22px;
+      box-shadow: var(--shadow2);
+    }
+    .quote .q{
+      font-size:16px;line-height:1.6;
+      color: rgba(238,242,247,.92);
+    }
+    .quote .who{
+      margin-top:14px;
+      color: var(--muted);
+      font-weight:800;
+      font-size:13px;
+    }
+
+    /* Timeline */
+    .timeline{
+      margin-top:22px;
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 980px){ .timeline{grid-template-columns:1fr} }
+    .tbox{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      border-radius:24px;
+      padding:20px;
+      box-shadow: var(--shadow2);
+    }
+    .tbox b{
+      display:inline-flex;align-items:center;gap:10px;
+      font-weight:950;
+      font-size:16px;
+    }
+    .badgeDot{
+      width:10px;height:10px;border-radius:999px;background:var(--gradient);
+      box-shadow:0 0 16px rgba(77,163,255,.25);
+    }
+    .tbox ul{margin-top:12px;padding-left:18px;color:var(--muted)}
+    .tbox li{margin:8px 0;font-size:14.5px}
+
+    /* Loss avoidance */
+    .loss{
+      margin-top:22px;
+      display:grid;grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 980px){ .loss{grid-template-columns:1fr} }
+    .loss .box{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.20);
+      border-radius:24px;
+      padding:20px;
+      box-shadow: var(--shadow2);
+    }
+    .loss .title{
+      display:flex;align-items:center;gap:10px;font-weight:950;font-size:16px;
+    }
+    .icon{
+      width:24px;height:24px;border-radius:10px;
+      display:inline-flex;align-items:center;justify-content:center;
+      font-weight:950;
+      color:#0a0f18;
+      background: var(--gradient);
+    }
+    .loss ul{margin-top:12px;padding-left:18px;color:var(--muted)}
+    .loss li{margin:8px 0;font-size:14.5px}
+    .loss .red{color:rgba(255,107,107,.95);font-weight:900}
+    .loss .green{color:rgba(53,208,127,.95);font-weight:900}
+
+    /* Protocol */
+    .protocol{
+      margin-top:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius:28px;
+      padding:22px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .protocol:before{
+      content:"";
+      position:absolute;inset:-120px auto auto -120px;
+      width:420px;height:420px;border-radius:999px;
+      background: radial-gradient(circle, rgba(77,163,255,.18), transparent 60%);
+      filter: blur(1px);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .protocol > *{position:relative}
+    .protocol h3{
+      font-size:22px;font-weight:950;letter-spacing:-.02em;
+    }
+    .protocol p{color:var(--muted);margin-top:8px}
+    .steps{
+      margin-top:16px;
+      display:grid;gap:12px;
+    }
+    .step{
+      display:flex;gap:12px;align-items:flex-start;
+      padding:16px;border-radius:20px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.18);
+    }
+    .step .n{
+      width:34px;height:34px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:950;color:#0a0f18;background: var(--gradient);
+      flex:0 0 34px;
+    }
+    .step b{display:block;font-weight:950}
+    .step span{display:block;color:var(--muted);margin-top:4px;font-size:14.5px}
+
+    /* Compare */
+    .compare{
+      margin-top:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      border-radius:26px;
+      overflow:hidden;
+    }
+    .compare-head{
+      padding:16px 18px;
+      display:grid;grid-template-columns: 1fr 1fr 1fr;
+      gap:10px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      font-weight:950;color:rgba(238,242,247,.92);
+    }
+    .compare-rows{display:grid;grid-template-columns: 1fr 1fr 1fr}
+    .cell{
+      padding:14px 18px;
+      border-right:1px solid rgba(255,255,255,.06);
+      border-bottom:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:14.5px;
+    }
+    .compare-rows .cell:nth-child(3n){border-right:none}
+    .yes{color:var(--ok);font-weight:950}
+    .no{color:var(--danger);font-weight:950}
+
+    /* FAQ */
+    details{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      border-radius:20px;
+      padding:16px;
+    }
+    details summary{
+      cursor:pointer;
+      font-weight:950;
+      color:rgba(238,242,247,.95);
+      list-style:none;
+    }
+    details p{color:var(--muted);margin-top:10px;font-size:14.5px}
+    details + details{margin-top:12px}
+
+    /* Final */
+    .final{
+      padding:76px 0 96px;
+    }
+    .final-box{
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      border-radius:30px;
+      padding:30px;
+      box-shadow: var(--shadow);
+      display:grid;grid-template-columns: 1.2fr .8fr;gap:18px;align-items:center;
+    }
+    @media (max-width: 980px){ .final-box{grid-template-columns:1fr} }
+    .final-box h3{
+      font-size:28px;line-height:1.08;font-weight:950;
+    }
+    .final-box h3 span{
+      background: var(--gradient);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .final-box p{color:var(--muted);margin-top:10px;font-size:15px}
+    .mini{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      border-radius:24px;
+      padding:18px;
+      text-align:center;
+    }
+    .mini .big{
+      font-size:46px;font-weight:950;letter-spacing:-.03em;
+      background: var(--gradient);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      margin-top:8px;
+    }
+    .mini .btn{width:100%;margin-top:12px}
+
+    footer{
+      border-top:1px solid rgba(255,255,255,.07);
+      padding:26px 0;
+      color:#6b7280;
+      font-size:13px;
+      text-align:center;
+    }
+
+    /* Sticky mobile bar */
+    .buybar{
+      position:fixed;left:0;right:0;bottom:0;z-index:70;
+      padding:10px 14px;
+      background: rgba(7,11,17,.84);
+      border-top:1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(12px);
+      display:none;
+    }
+    .buybar .in{
+      max-width:1160px;margin:0 auto;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .buybar .txt{font-weight:950;font-size:13px;color:rgba(238,242,247,.92)}
+    .buybar .sub{margin:0;color:var(--muted);font-size:12px}
+    .buybar .btn{padding:12px 16px;border-radius:14px}
+    @media (max-width: 980px){ .buybar{display:block} body{padding-bottom:74px} }
+
+    /* Reveal */
+    .reveal{opacity:0;transform:translateY(10px);transition: opacity .6s ease, transform .6s ease}
+    .reveal.on{opacity:1;transform:translateY(0)}
+  </style>
+</head>
+
+<body>
+
+  <!-- Top -->
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">
+          <div class="mark"></div>
+          <div>ConSySenc<span>I.A</span> <span style="-webkit-text-fill-color:unset;color:inherit;background:none">PRO</span></div>
+        </div>
+
+        <div class="nav-links">
+          <a href="#virada">A virada</a>
+          <a href="#protocolo">Protocolo PRO™</a>
+          <a href="#comparacao">Comparação</a>
+          <a href="#faq">Dúvidas</a>
+        </div>
+
+        <a class="btn btn-primary" href="https://pay.kiwify.com.br/HViikAy">Entrar no Pro</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="reveal">
+          <div class="pill"><span class="spark"></span> Nível PRO • Operação Profissional</div>
+
+          <h1>O momento em que você deixa de “vender” e começa a <span class="grad">operar</span>.</h1>
+          <p class="lead">
+            No Pro você cria uma operação previsível: padrão, processo e automação.
+            É aqui que o ConSySencI.A vira <b>máquina</b> — e você vira <b>gestor da performance</b>.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://pay.kiwify.com.br/HViikAy">Ativar PRO agora</a>
+            <a class="btn btn-ghost" href="#virada">Entender a virada</a>
+          </div>
+
+          <div class="trust">
+            <div class="chip">Para quem quer consistência</div>
+            <div class="chip">Escala com controle</div>
+            <div class="chip">Processo > “motivação”</div>
+          </div>
+        </div>
+
+        <aside class="panel reveal">
+          <h3>O que você destrava no Pro</h3>
+          <p>Você monta uma estrutura que funciona mesmo quando você não está “no modo vendedor”.</p>
+
+          <div class="kpi">
+            <div class="box">
+              <div class="num">Padrão</div>
+              <div class="lbl">rotina que não quebra</div>
+            </div>
+            <div class="box">
+              <div class="num">Automação</div>
+              <div class="lbl">menos repetição, mais foco</div>
+            </div>
+            <div class="box">
+              <div class="num">Previsibilidade</div>
+              <div class="lbl">você entende os números</div>
+            </div>
+            <div class="box">
+              <div class="num">Escala</div>
+              <div class="lbl">cresce sem virar caos</div>
+            </div>
+          </div>
+
+          <div class="offer">
+            <div class="row">
+              <div>
+                <div style="font-weight:950">ConSySencI.A PRO</div>
+                <div class="meta">Acesso imediato • Operação profissional</div>
+              </div>
+              <div class="tag">PRO</div>
+            </div>
+
+            <div class="price">Acesso</div>
+            <div class="meta">Clique e vá direto para o checkout.</div>
+
+            <a class="btn btn-primary" href="https://pay.kiwify.com.br/HViikAy">Entrar no Pro</a>
+            <a class="btn btn-ghost" href="#protocolo">Ver Protocolo PRO™</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Virada / Story -->
+  <section id="virada">
+    <div class="wrap">
+      <div class="section-title reveal">A virada de chave</div>
+      <div class="section-sub reveal">
+        Você sabe que está pronto para o Pro quando percebe isso:
+        <b>o problema não é “conseguir vender” — é conseguir repetir.</b>
+      </div>
+
+      <div class="story">
+        <div class="grid3" style="margin-top:0">
+          <div class="card reveal">
+            <h4>Antes do Pro</h4>
+            <p>
+              Você vende quando está inspirado. Quando a rotina aperta, a consistência cai.
+              A operação depende do seu humor e do seu tempo.
+            </p>
+          </div>
+          <div class="card reveal">
+            <h4>O que trava</h4>
+            <p>
+              Falta um padrão: o que fazer todo dia, como medir, como ajustar e como manter o funil funcionando
+              mesmo sem esforço mental.
+            </p>
+          </div>
+          <div class="card reveal">
+            <h4>A decisão PRO</h4>
+            <p>
+              Você escolhe operar como profissional: processo, automação e controle.
+              A partir daqui, “resultado” deixa de ser sorte.
+            </p>
+          </div>
+        </div>
+
+        <div class="quote reveal">
+          <div class="q">
+            “Quando você cria um processo, você compra liberdade.
+            Porque o sistema continua rodando — e você não precisa recomeçar do zero toda semana.”
+          </div>
+          <div class="who">— Filosofia do ConSySencI.A PRO</div>
+        </div>
+      </div>
+
+      <div class="cta-row reveal" style="margin-top:22px">
+        <a class="btn btn-primary" href="https://pay.kiwify.com.br/HViikAy">Quero operar no PRO</a>
+        <a class="btn btn-ghost" href="#timeline">Ver 7 dias / 30 dias</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section id="timeline">
+    <div class="wrap">
+      <div class="section-title reveal">O que muda em 7 dias e em 30 dias</div>
+      <div class="section-sub reveal">
+        Sem promessa mágica. É sobre processo: quando você aplica, você sente a diferença.
+      </div>
+
+      <div class="timeline">
+        <div class="tbox reveal">
+          <b><span class="badgeDot"></span> Em 7 dias</b>
+          <ul>
+            <li>Seu funil fica claro (o que fazer, quando fazer e por quê).</li>
+            <li>Você começa a padronizar suas mensagens e seus passos.</li>
+            <li>Você deixa de depender de “força de vontade” para executar.</li>
+          </ul>
+        </div>
+
+        <div class="tbox reveal">
+          <b><span class="badgeDot"></span> Em 30 dias</b>
+          <ul>
+            <li>Você tem rotina + automação + métricas essenciais.</li>
+            <li>Você sabe onde está perdendo vendas e como corrigir rápido.</li>
+            <li>Você começa a escalar com controle — sem virar bagunça.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Loss avoidance -->
+  <section id="perdas">
+    <div class="wrap">
+      <div class="section-title reveal">O que você para de perder no Pro</div>
+      <div class="section-sub reveal">
+        O Pro é uma economia invisível: você recupera tempo, energia e dinheiro que estavam vazando.
+      </div>
+
+      <div class="loss">
+        <div class="box reveal">
+          <div class="title"><span class="icon">–</span> Você corta o que te drena</div>
+          <ul>
+            <li><span class="red">Tempo</span> em conversa sem direção.</li>
+            <li><span class="red">Energia</span> tentando “inventar mensagem” todo dia.</li>
+            <li><span class="red">Vendas</span> perdidas por falta de rotina e follow-up.</li>
+          </ul>
+        </div>
+
+        <div class="box reveal">
+          <div class="title"><span class="icon">+</span> Você ganha o que importa</div>
+          <ul>
+            <li><span class="green">Clareza</span> do funil e das etapas.</li>
+            <li><span class="green">Padrão</span> de execução (todo dia, sem drama).</li>
+            <li><span class="green">Controle</span> para ajustar e melhorar sempre.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-row reveal" style="margin-top:22px">
+        <a class="btn btn-primary" href="https://pay.kiwify.com.br/HViikAy">Entrar no PRO agora</a>
+        <a class="btn btn-ghost" href="#protocolo">Ver o Protocolo PRO™</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Protocol -->
+  <section id="protocolo">
+    <div class="wrap">
+      <div class="section-title reveal">Protocolo PRO™</div>
+      <div class="section-sub reveal">
+        Um framework simples e poderoso para transformar execução em operação.
+        <b>Não é “motivação” — é estrutura.</b>
+      </div>
+
+      <div class="protocol reveal">
+        <h3>Como o Protocolo PRO™ funciona</h3>
+        <p>
+          Você roda 4 etapas em ciclo. Cada ciclo deixa o sistema mais forte.
+          É assim que operações crescem sem colapsar.
+        </p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="n">P</div>
+            <div>
+              <b>Padronizar</b>
+              <span>Crie mensagens, etapas e rotina que qualquer dia consegue repetir.</span>
+            </div>
+          </div>
+          <div class="step">
+            <div class="n">R</div>
+            <div>
+              <b>Rodar</b>
+              <span>Execute com consistência (sem “reinventar” toda semana).</span>
+            </div>
+          </div>
+          <div class="step">
+            <div class="n">O</div>
+            <div>
+              <b>Otimizar</b>
+              <span>Corrija onde trava: resposta, objeção, oferta ou timing.</span>
+            </div>
+          </div>
+          <div class="step">
+            <div class="n">+</div>
+            <div>
+              <b>Escalar</b>
+              <span>Aumente volume sem perder controle — e sem virar caos.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-row" style="margin-top:18px">
+          <a class="btn btn-primary" href="https://pay.kiwify.com.br/HViikAy">Quero o Protocolo PRO™</a>
+          <a class="btn btn-ghost" href="#comparacao">Comparar níveis</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compare -->
+  <section id="comparacao">
+    <div class="wrap">
+      <div class="section-title reveal">Comparação por níveis</div>
+      <div class="section-sub reveal">Onde o Pro entra: previsibilidade + escala com controle.</div>
+
+      <div class="compare reveal">
+        <div class="compare-head">
+          <div>Nível 1</div>
+          <div>Nível 2</div>
+          <div>PRO</div>
+        </div>
+
+        <div class="compare-rows">
+          <div class="cell">Começar e entender</div>
+          <div class="cell">Melhorar conversão</div>
+          <div class="cell">Operar e escalar</div>
+
+          <div class="cell"><span class="yes">✅</span> Base</div>
+          <div class="cell"><span class="yes">✅</span> Otimização</div>
+          <div class="cell"><span class="yes">✅</span> Protocolo PRO™</div>
+
+          <div class="cell"><span class="no">✖</span> Rotina</div>
+          <div class="cell"><span class="no">✖</span> Automação total</div>
+          <div class="cell"><span class="yes">✅</span> Rotina + automação</div>
+
+          <div class="cell"><span class="no">✖</span> Métricas</div>
+          <div class="cell"><span class="yes">✅</span> Consistência</div>
+          <div class="cell"><span class="yes">✅</span> Previsibilidade</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-title reveal">Dúvidas (as que travam gente séria)</div>
+      <div class="section-sub reveal">Sem enrolação. O Pro é para quem quer operar com clareza.</div>
+
+      <div style="margin-top:18px" class="reveal">
+        <details>
+          <summary>O Pro serve para iniciante?</summary>
+          <p>O Pro é melhor aproveitado por quem já passou do básico (Nível 1) e quer consistência e rotina.</p>
+        </details>
+
+        <details>
+          <summary>Isso é “mais um curso”?</summary>
+          <p>Não. É um framework operacional (Protocolo PRO™) com estrutura e execução: rotina, automação e métricas essenciais.</p>
+        </details>
+
+        <details>
+          <summary>Vou ter acesso imediato?</summary>
+          <p>Sim. Pagamento confirmado → acesso liberado na área de membros.</p>
+        </details>
+
+        <details>
+          <summary>O que vem depois do Pro?</summary>
+          <p>O próximo estágio é o Núcleo (I.A Genealógica), para expansão e evolução do sistema.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final">
+    <div class="wrap">
+      <div class="final-box reveal">
+        <div>
+          <h3>Você quer resultado… ou quer <span>previsibilidade</span>?</h3>
+          <p>
+            Resultado sem processo vira loteria.
+            No Pro, você monta uma operação que melhora com o tempo — e não te prende na “correria”.
+          </p>
+        </div>
+
+        <div class="mini">
+          <div style="font-weight:950">ConSySencI.A PRO</div>
+          <div class="big">Entrar</div>
+          <div class="section-sub" style="margin:8px 0 0;max-width:none">
+            Acesso imediato ao Protocolo PRO™
+          </div>
+          <a class="btn btn-primary" href="https://pay.kiwify.com.br/HViikAy">Ativar PRO agora</a>
+          <a class="btn btn-ghost" href="#protocolo">Ver Protocolo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 ConSySencI.A — Todos os direitos reservados
+  </footer>
+
+  <!-- Mobile Buy Bar -->
+  <div class="buybar">
+    <div class="in">
+      <div>
+        <div class="txt">Nível PRO • Operação Profissional</div>
+        <div class="sub">Acesso imediato • Protocolo PRO™</div>
+      </div>
+      <a class="btn btn-primary" href="https://pay.kiwify.com.br/HViikAy">Entrar</a>
+    </div>
+  </div>
+
+  <script>
+    // Reveal on scroll (leve)
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('on');
+          obs.unobserve(e.target);
+        }
+      })
+    }, {threshold: 0.12});
+
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  </script>
+</body>
+</html>
