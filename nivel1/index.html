@@ -1,127 +1,91 @@
-
 <!doctype html>
 <html lang="pt-br">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ConSySencI.A — Nível 1 | Ativação do Sistema</title>
-  <meta name="description" content="Ative um sistema inteligente que vende e evolui com você. Comece com R$10 no Nível 1 — Ativação do Sistema." />
-  <meta name="theme-color" content="#070A12" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ConSySencI.A — Nível 1 | Ative seu robô no WhatsApp</title>
+  <meta name="description" content="Ative um robô de vendas automáticas no WhatsApp. Nível 1 ConSySencI.A por R$15. Baixou o app, chamou no WhatsApp, ativou." />
+  <meta name="theme-color" content="#06110B" />
 
   <style>
     :root{
-      --bg:#050710;
+      --bg:#040b08;
       --panel: rgba(255,255,255,.06);
       --panel2: rgba(255,255,255,.035);
       --stroke: rgba(255,255,255,.12);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.70);
-      --muted2: rgba(255,255,255,.55);
-      --blue:#2BB5FF;
-      --gold:#F7C84B;
-      --cyan:#63E6FF;
-      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --text: rgba(255,255,255,.94);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.56);
+      --green:#1BFF9A;
+      --green2:#00C27A;
+      --lime:#B6FFE3;
+      --shadow: 0 22px 70px rgba(0,0,0,.62);
       --r: 18px;
       --max: 1120px;
+      --safeB: env(safe-area-inset-bottom);
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: var(--bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:
+        radial-gradient(1100px 700px at 20% 15%, rgba(27,255,154,.15), transparent 60%),
+        radial-gradient(900px 700px at 82% 25%, rgba(0,194,122,.10), transparent 60%),
+        radial-gradient(900px 900px at 60% 90%, rgba(182,255,227,.06), transparent 65%),
+        linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)),
+        var(--bg);
       color: var(--text);
       overflow-x:hidden;
-    }
-
-    /* ========= FUNDO (CORRIGIDO: não bloqueia o conteúdo) ========= */
-    .bg, .bg::before, .bg::after{
-      position:fixed;
-      inset:0;
-      z-index:0;
-      pointer-events:none; /* <<<<< evita “tela em branco” por overlay */
-    }
-    .bg{
-      background:
-        radial-gradient(1200px 800px at 20% 15%, rgba(43,181,255,.18), transparent 60%),
-        radial-gradient(900px 700px at 78% 20%, rgba(247,200,75,.16), transparent 55%),
-        radial-gradient(900px 900px at 60% 82%, rgba(99,230,255,.10), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
-      filter:saturate(1.08);
-    }
-    .bg::before{
-      content:"";
-      background:
-        radial-gradient(700px 500px at 50% 35%, rgba(255,255,255,.05), transparent 60%),
-        radial-gradient(500px 500px at 20% 70%, rgba(247,200,75,.06), transparent 60%),
-        radial-gradient(520px 520px at 82% 68%, rgba(43,181,255,.06), transparent 60%);
-      opacity:.9;
-    }
-    .bg::after{
-      content:"";
-      background-image:
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-      background-size: 42px 42px;
-      opacity:.25;
-      mask-image: radial-gradient(circle at 50% 35%, black 0%, transparent 70%);
-    }
-
-    /* ========= CONTEÚDO (sempre acima do fundo) ========= */
-    .app{
-      position:relative;
-      z-index:2; /* <<<<< garante que aparece */
-      min-height:100%;
     }
 
     a{color:inherit;text-decoration:none}
     .wrap{
       max-width: var(--max);
       margin: 0 auto;
-      padding: 18px 18px 64px;
+      padding: 18px 18px 84px;
     }
 
-    /* ========= TOPBAR ========= */
+    /* Topbar */
     .topbar{
-      position:sticky;
-      top:0;
+      position: sticky;
+      top: 0;
       z-index: 20;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      background: linear-gradient(180deg, rgba(5,7,16,.86), rgba(5,7,16,.55));
+      background: linear-gradient(180deg, rgba(4,11,8,.90), rgba(4,11,8,.65));
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
     .topbar .wrap{
-      padding: 14px 18px;
+      padding: 12px 18px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap: 14px;
+      gap: 12px;
     }
     .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width: 0;
+      display:flex;align-items:center;gap:10px;min-width:0;
     }
     .logo{
       width:38px;height:38px;border-radius:12px;
-      background: radial-gradient(circle at 25% 20%, rgba(43,181,255,.95), rgba(43,181,255,.18) 52%, transparent 64%),
-                  radial-gradient(circle at 75% 80%, rgba(247,200,75,.95), rgba(247,200,75,.15) 55%, transparent 68%),
-                  rgba(255,255,255,.05);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(27,255,154,.95), rgba(27,255,154,.10) 55%, transparent 65%),
+        radial-gradient(circle at 70% 80%, rgba(0,194,122,.85), rgba(0,194,122,.10) 55%, transparent 70%),
+        rgba(255,255,255,.05);
       border:1px solid rgba(255,255,255,.16);
-      box-shadow: 0 14px 40px rgba(0,0,0,.45);
+      box-shadow: 0 0 30px rgba(27,255,154,.26);
       flex:0 0 auto;
     }
     .brand h1{
-      font-size:15px;
       margin:0;
+      font-size: 14px;
       line-height:1.15;
+      letter-spacing:.2px;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
-      max-width: 52vw;
+      max-width: 55vw;
     }
     .brand p{
       margin:2px 0 0;
@@ -130,9 +94,10 @@
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
-      max-width: 52vw;
+      max-width: 55vw;
     }
 
+    /* Buttons */
     .btn{
       display:inline-flex;
       align-items:center;
@@ -143,84 +108,68 @@
       border: 1px solid rgba(255,255,255,.16);
       background: rgba(255,255,255,.06);
       color: var(--text);
-      font-weight: 650;
+      font-weight: 750;
       cursor:pointer;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
       user-select:none;
+      white-space:nowrap;
     }
     .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.22);}
     .btn:active{transform: translateY(0px);}
 
     .btn.primary{
-      background: linear-gradient(90deg, rgba(43,181,255,.92), rgba(247,200,75,.92));
+      background: linear-gradient(90deg, var(--green), var(--green2));
       border-color: rgba(255,255,255,.20);
-      color: #081018;
-      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+      color: #04110a;
+      box-shadow: 0 18px 55px rgba(0,0,0,.45), 0 0 40px rgba(27,255,154,.22);
     }
-    .btn.primary:hover{
-      filter: saturate(1.08);
-      transform: translateY(-1px) scale(1.01);
-    }
+    .btn.primary:hover{filter:saturate(1.08); transform: translateY(-1px) scale(1.01);}
 
-    /* ========= HERO ========= */
+    /* Hero */
     .hero{
-      padding: 42px 0 24px;
+      padding: 34px 0 14px;
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 26px;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 20px;
       align-items: stretch;
     }
-    @media (max-width: 880px){
-      .hero{grid-template-columns:1fr; padding-top: 22px;}
-    }
+    @media (max-width: 920px){ .hero{grid-template-columns:1fr; padding-top: 18px;} }
 
     .headline{
-      margin:0 0 14px;
-      font-size: clamp(28px, 4vw, 48px);
-      line-height: 1.05;
-      letter-spacing:-.02em;
-    }
-    .grad{
-      background: linear-gradient(90deg, rgba(255,255,255,.95), rgba(255,255,255,.75));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
+      margin:0 0 12px;
+      font-size: clamp(28px, 4vw, 52px);
+      line-height: 1.03;
+      letter-spacing:-.03em;
     }
     .emph{
-      background: linear-gradient(90deg, var(--blue), var(--gold));
+      background: linear-gradient(90deg, var(--green), var(--lime));
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
-      text-shadow: 0 0 30px rgba(43,181,255,.10);
+      text-shadow: 0 0 22px rgba(27,255,154,.12);
     }
     .sub{
-      margin: 0 0 18px;
+      margin: 0 0 14px;
       color: var(--muted);
       font-size: 15.5px;
-      line-height: 1.55;
-      max-width: 58ch;
+      line-height: 1.58;
+      max-width: 62ch;
+    }
+    .micro{
+      margin: 10px 0 0;
+      color: var(--muted2);
+      font-size: 12.5px;
+      line-height: 1.4;
     }
 
-    .cta-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 12px;
-      align-items:center;
-      margin: 18px 0 16px;
-    }
-    .pill{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      margin-top: 10px;
+    .pillrow{
+      display:flex;flex-wrap:wrap;gap:10px;
+      margin: 14px 0 0;
       color: var(--muted2);
       font-size: 12.5px;
     }
     .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
+      display:inline-flex;align-items:center;gap:8px;
       padding: 8px 10px;
       border-radius: 999px;
       border:1px solid rgba(255,255,255,.12);
@@ -228,12 +177,12 @@
     }
     .dot{
       width:8px;height:8px;border-radius:999px;
-      background: linear-gradient(90deg, var(--blue), var(--gold));
-      box-shadow: 0 0 16px rgba(43,181,255,.22);
+      background: linear-gradient(90deg, var(--green), var(--green2));
+      box-shadow: 0 0 18px rgba(27,255,154,.22);
     }
 
     .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
       border:1px solid rgba(255,255,255,.12);
       border-radius: var(--r);
       box-shadow: var(--shadow);
@@ -247,67 +196,42 @@
       content:"";
       position:absolute;
       inset:-40%;
-      background: radial-gradient(circle at 30% 30%, rgba(43,181,255,.22), transparent 55%),
-                  radial-gradient(circle at 70% 70%, rgba(247,200,75,.18), transparent 55%);
+      background:
+        radial-gradient(circle at 28% 30%, rgba(27,255,154,.22), transparent 55%),
+        radial-gradient(circle at 72% 70%, rgba(0,194,122,.16), transparent 55%);
       filter: blur(18px);
-      opacity:.8;
+      opacity:.85;
       pointer-events:none;
     }
     .hero-card > *{position:relative; z-index:1;}
+
     .price{
-      font-size: 42px;
-      font-weight: 800;
-      letter-spacing:-.02em;
+      font-size: 46px;
+      font-weight: 900;
+      letter-spacing:-.03em;
       margin: 8px 0 6px;
-      background: linear-gradient(90deg, var(--blue), var(--gold));
+      background: linear-gradient(90deg, var(--green), var(--lime));
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
     }
-    .small{
-      margin:0;
-      color: var(--muted2);
-      font-size: 13px;
-      line-height: 1.4;
-    }
-    .divider{
-      height:1px;
-      background: rgba(255,255,255,.10);
-      margin: 14px 0;
-    }
-    .list{
-      margin: 0;
-      padding: 0;
-      list-style:none;
-      display:grid;
-      gap: 10px;
-    }
-    .li{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.45;
-    }
+
+    .divider{height:1px;background: rgba(255,255,255,.10); margin: 14px 0;}
+    .list{margin:0;padding:0;list-style:none;display:grid;gap:10px;}
+    .li{display:flex;gap:10px;align-items:flex-start;color: var(--muted);font-size:14px;line-height:1.45;}
     .check{
       width:18px;height:18px;border-radius:6px;
       background: rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.14);
       display:flex;align-items:center;justify-content:center;
-      flex:0 0 auto;
-      margin-top: 1px;
+      flex:0 0 auto;margin-top:1px;color:var(--green);
+      font-weight:900;
     }
-    .check svg{width:13px;height:13px}
 
-    /* ========= SEÇÕES ========= */
+    /* Sections */
     section{padding: 22px 0;}
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    @media (max-width: 880px){ .grid3{grid-template-columns:1fr;}}
+    .grid3{display:grid;grid-template-columns: repeat(3, 1fr);gap: 14px;}
+    @media (max-width: 880px){ .grid3{grid-template-columns:1fr;} }
     .mini{
       padding: 16px;
       background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
@@ -317,48 +241,28 @@
     .mini h3{margin:0 0 6px; font-size: 15px}
     .mini p{margin:0; color:var(--muted); font-size: 13.5px; line-height: 1.55;}
 
-    .section-title{
-      margin:0 0 8px;
-      font-size: 18px;
-      letter-spacing:-.01em;
-    }
-    .section-sub{
-      margin:0 0 14px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-      max-width: 75ch;
-    }
+    .section-title{margin:0 0 8px;font-size: 18px;letter-spacing:-.01em;}
+    .section-sub{margin:0 0 14px;color: var(--muted);font-size: 14px;line-height: 1.6;max-width: 78ch;}
 
-    .steps{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    @media (max-width: 880px){ .steps{grid-template-columns:1fr;}}
+    .steps{display:grid;grid-template-columns: 1fr 1fr;gap: 14px;}
+    @media (max-width: 880px){ .steps{grid-template-columns:1fr;} }
     .step{
-      padding: 16px;
-      border-radius: var(--r);
+      padding: 16px;border-radius: var(--r);
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
     }
     .step .n{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
+      display:inline-flex;align-items:center;justify-content:center;
       width:34px;height:34px;border-radius:12px;
-      background: linear-gradient(90deg, rgba(43,181,255,.22), rgba(247,200,75,.18));
+      background: linear-gradient(90deg, rgba(27,255,154,.20), rgba(0,194,122,.16));
       border: 1px solid rgba(255,255,255,.12);
-      margin-bottom: 10px;
-      font-weight: 800;
+      margin-bottom: 10px;font-weight: 900;color: var(--lime);
     }
     .step h4{margin: 0 0 6px; font-size: 15px}
     .step p{margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.55;}
 
-    .faq{
-      display:grid;
-      gap: 10px;
-    }
+    /* FAQ */
+    .faq{display:grid;gap:10px;}
     details{
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,.10);
@@ -366,14 +270,10 @@
       overflow:hidden;
     }
     summary{
-      list-style:none;
-      cursor:pointer;
+      list-style:none;cursor:pointer;
       padding: 14px 14px;
-      font-weight: 650;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
+      font-weight: 750;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
     }
     summary::-webkit-details-marker{display:none}
     details p{
@@ -383,28 +283,16 @@
       font-size: 13.5px;
       line-height: 1.6;
     }
-    .chev{
-      width:18px;height:18px;
-      opacity:.8;
-      transition: transform .15s ease;
-      flex:0 0 auto;
-    }
+    .chev{width:18px;height:18px;opacity:.85;transition: transform .15s ease;flex:0 0 auto;}
     details[open] .chev{transform: rotate(180deg);}
 
-    /* ========= CTA FINAL ========= */
-    .final{
-      padding: 22px 0 8px;
-    }
+    /* Final CTA */
     .final .card{
       padding: 18px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 14px;
-      flex-wrap:wrap;
+      display:flex;align-items:center;justify-content:space-between;gap: 14px;flex-wrap:wrap;
     }
-    .final h3{margin:0; font-size: 16px}
-    .final p{margin:6px 0 0; color:var(--muted); font-size: 13.5px; line-height:1.5; max-width: 60ch}
+    .final h3{margin:0;font-size: 16px}
+    .final p{margin:6px 0 0;color:var(--muted);font-size: 13.5px;line-height:1.5;max-width: 70ch}
 
     footer{
       padding: 18px 0 40px;
@@ -413,234 +301,267 @@
       text-align:center;
     }
 
-    /* ========= ANIMAÇÕES leves (sem esconder conteúdo) ========= */
-    .fade-in{
-      animation: fadeIn .6s ease both;
+    /* Sticky mobile bar */
+    .stickybar{
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      padding: 10px 12px calc(10px + var(--safeB));
+      background: linear-gradient(180deg, rgba(4,11,8,.2), rgba(4,11,8,.92));
+      border-top: 1px solid rgba(255,255,255,.10);
+      z-index: 50;
+      backdrop-filter: blur(10px);
     }
-    @keyframes fadeIn{
-      from{opacity:0; transform: translateY(8px)}
-      to{opacity:1; transform: translateY(0)}
+    .stickybar .inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .stickybar .meta{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
+    .stickybar .meta b{
+      font-size: 13px;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .stickybar .meta span{
+      font-size: 12px;
+      color: var(--muted2);
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     }
 
+    /* small helper */
+    .kbd{
+      display:inline-flex;align-items:center;gap:8px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size: 12.5px;
+    }
   </style>
 </head>
 
 <body>
-  <div class="bg" aria-hidden="true"></div>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div style="min-width:0">
+          <h1>ConSySencI.A</h1>
+          <p>Nível 1 — Ativação do Robô</p>
+        </div>
+      </div>
 
-  <div class="app">
-    <!-- TOPBAR -->
-    <div class="topbar">
-      <div class="wrap">
-        <div class="brand">
-          <div class="logo" aria-hidden="true"></div>
-          <div style="min-width:0">
-            <h1>ConSySencI.A</h1>
-            <p>Nível 1 — Ativação do Sistema</p>
-          </div>
+      <a class="btn primary" href="#ativar">
+        Ativar agora
+      </a>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <div class="hero">
+      <div>
+        <h2 class="headline">
+          Ative um <span class="emph">robô vivo</span><br/>
+          que vende automações no WhatsApp.
+        </h2>
+
+        <p class="sub">
+          O Nível 1 é a ativação rápida: <b>baixa o app</b>, <b>me chama no WhatsApp</b> e em poucos minutos
+          você recebe <b>login e senha</b> pra ligar seu robô.
+        </p>
+
+        <p class="sub">
+          Sem curso longo. Sem confusão. Sem enrolação.
+          <br/><span class="kbd">✅ R$15 (pagamento único) • ✅ Entrega rápida • ✅ Feito pra celular</span>
+        </p>
+
+        <div class="pillrow" aria-label="destaques">
+          <span class="tag"><span class="dot"></span> Execução simples</span>
+          <span class="tag"><span class="dot"></span> Copy + estrutura pronta</span>
+          <span class="tag"><span class="dot"></span> Operação no WhatsApp</span>
         </div>
 
-        <a class="btn primary" href="https://pay.kiwify.com.br/apT0zgS" rel="noopener">
-          Ativar agora
+        <p class="micro">
+          *Aviso honesto:* isso não é promessa milagrosa. É um sistema simples que funciona quando você liga e usa.
+        </p>
+      </div>
+
+      <div class="card hero-card" id="ativar">
+        <p style="margin:0;color:var(--muted2);font-weight:800">Nível 1 — Ativação</p>
+        <div class="price">R$ 15</div>
+        <p style="margin:0;color:var(--muted);font-size:13.5px;line-height:1.5">
+          Você entra com o mínimo, ativa o robô e começa o primeiro ciclo.
+        </p>
+
+        <div class="divider"></div>
+
+        <ul class="list">
+          <li class="li"><span class="check">✓</span><span>Login e senha liberados no WhatsApp</span></li>
+          <li class="li"><span class="check">✓</span><span>Robô de respostas + fluxo de conversão pronto</span></li>
+          <li class="li"><span class="check">✓</span><span>Orientação direta (sem textão, sem teoria)</span></li>
+          <li class="li"><span class="check">✓</span><span>Base pronta pra evoluir pros próximos níveis</span></li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <a class="btn primary" style="width:100%"
+           href="https://wa.me/5511934929066?text=Quero%20ativar%20o%20ConSySencI.A%20N%C3%ADvel%201%20(R%2415).%20Me%20manda%20o%20passo%20a%20passo%20%2B%20login%20e%20senha."
+           rel="noopener">
+          Chamar no WhatsApp e ativar
         </a>
+
+        <p style="margin:10px 0 0; text-align:center; color:var(--muted2); font-size:12px">
+          Resposta rápida • Ativação guiada • Sem complicação
+        </p>
       </div>
     </div>
 
-    <main class="wrap">
-      <!-- HERO -->
-      <div class="hero">
-        <div class="fade-in">
-          <h2 class="headline">
-            Ative um <span class="emph">sistema inteligente</span><br/>
-            que vende e evolui com você.
-          </h2>
-          <p class="sub">
-            Comece com <b>R$10</b> e entre no primeiro nível do ConSySencI.A.
-            Um sistema pensado para <b>pessoas comuns</b> iniciarem, validarem e evoluírem com lógica — sem confusão e sem enrolação.
-          </p>
-
-          <div class="cta-row">
-            <a class="btn primary" href="https://pay.kiwify.com.br/apT0zgS" rel="noopener">Ativar por R$10</a>
-            <a class="btn" href="#como-funciona">Ver como funciona</a>
-          </div>
-
-          <div class="pill">
-            <span class="tag"><span class="dot"></span> Pagamento único</span>
-            <span class="tag"><span class="dot"></span> Acesso imediato</span>
-            <span class="tag"><span class="dot"></span> Feito para mobile</span>
-          </div>
+    <!-- BENEFÍCIOS (corta dúvidas em 3 caixas) -->
+    <section>
+      <div class="grid3">
+        <div class="mini">
+          <h3>Você entende em 1 minuto</h3>
+          <p>Oferta simples: ativar, ligar e operar. Zero excesso.</p>
         </div>
+        <div class="mini">
+          <h3>Você liga em poucos minutos</h3>
+          <p>Baixou o app, chamou no WhatsApp, recebeu acesso.</p>
+        </div>
+        <div class="mini">
+          <h3>Você começa do jeito certo</h3>
+          <p>Fluxo pronto pra vender sem parecer robô e sem textão.</p>
+        </div>
+      </div>
+    </section>
 
-        <div class="card hero-card fade-in" style="animation-delay:.08s">
-          <p class="small" style="margin:0;color:var(--muted2);font-weight:650">Nível 1 — Ativação</p>
-          <div class="price">R$ 10</div>
-          <p class="small">Estrutura inicial + orientação clara + base pronta para começar sem sobrecarga.</p>
+    <!-- COMO FUNCIONA -->
+    <section id="como-funciona">
+      <h3 class="section-title">Como funciona na prática</h3>
+      <p class="section-sub">
+        O cérebro decide rápido quando está claro. Então aqui vai o fluxo em 4 passos:
+      </p>
 
-          <div class="divider"></div>
-
-          <ul class="list">
-            <li class="li">
-              <span class="check" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M20 7L10.5 16.5L4 10" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <span>Checklist de ativação (passo a passo simples)</span>
-            </li>
-            <li class="li">
-              <span class="check" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M20 7L10.5 16.5L4 10" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <span>Primeiro “modo venda” configurado no WhatsApp</span>
-            </li>
-            <li class="li">
-              <span class="check" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M20 7L10.5 16.5L4 10" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <span>Plano de ação pra gerar seus primeiros resultados</span>
-            </li>
-          </ul>
-
-          <div class="divider"></div>
-
-          <a class="btn primary" style="width:100%" href="https://pay.kiwify.com.br/apT0zgS" rel="noopener">
-            Ativar agora
-          </a>
-          <p class="small" style="margin-top:10px; text-align:center;">Compra segura • Entrega imediata</p>
+      <div class="steps">
+        <div class="step">
+          <div class="n">1</div>
+          <h4>Ativação do Nível 1</h4>
+          <p>Você entra com R$15 (pagamento único) e inicia a ativação.</p>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <h4>Baixa o app</h4>
+          <p>Você instala o app que usamos para rodar o robô no WhatsApp.</p>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <h4>Me chama no WhatsApp</h4>
+          <p>Você manda uma mensagem e eu te guio no processo, sem enrolação.</p>
+        </div>
+        <div class="step">
+          <div class="n">4</div>
+          <h4>Recebe login e senha</h4>
+          <p>Em poucos minutos você entra e liga seu robô do Nível 1.</p>
         </div>
       </div>
 
-      <!-- BENEFÍCIOS -->
-      <section class="fade-in" style="animation-delay:.12s">
-        <div class="grid3">
-          <div class="mini">
-            <h3>Ativação simples</h3>
-            <p>Você entra, entende o sistema e começa sem sobrecarga.</p>
-          </div>
-          <div class="mini">
-            <h3>Primeiros resultados</h3>
-            <p>O foco é validar rápido: executar, aprender, ajustar e repetir.</p>
-          </div>
-          <div class="mini">
-            <h3>Evolução natural</h3>
-            <p>Você sobe de nível quando fizer sentido — sem promessas vazias.</p>
-          </div>
+      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn primary"
+           href="https://wa.me/5511934929066?text=Quero%20ativar%20o%20ConSySencI.A%20N%C3%ADvel%201%20(R%2415).%20Vamos%20agora."
+           rel="noopener">
+          Quero ativar agora
+        </a>
+        <a class="btn" href="#faq">Tirar dúvidas</a>
+      </div>
+    </section>
+
+    <!-- FAQ (objeções) -->
+    <section id="faq">
+      <h3 class="section-title">Perguntas rápidas</h3>
+      <p class="section-sub">Sem mistério — corta dúvidas aqui e ativa.</p>
+
+      <div class="faq">
+        <details>
+          <summary>
+            É R$15 mesmo? Tem mensalidade?
+            <svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <p>Sim: Nível 1 é R$15 (pagamento único). Ele serve pra ativar, testar e começar do jeito certo.</p>
+        </details>
+
+        <details>
+          <summary>
+            Eu preciso entender de bot / programação?
+            <svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <p>Não. É copiar, colar e ligar. Eu te guio no WhatsApp e você segue o passo a passo.</p>
+        </details>
+
+        <details>
+          <summary>
+            Funciona em iPhone?
+            <svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <p>O Nível 1 foi pensado para Android (onde esse tipo de automação é viável). Se você usa iPhone, me chama no WhatsApp que eu te explico as opções.</p>
+        </details>
+
+        <details>
+          <summary>
+            Isso garante resultado?
+            <svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <p>Não existe garantia. O que existe é: processo simples + execução. O Nível 1 te coloca em movimento sem travar.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="final">
+      <div class="card">
+        <div>
+          <h3>Quer ativar agora e ligar seu robô hoje?</h3>
+          <p>Se você gosta de coisa simples e direta: me chama no WhatsApp e eu te guio. R$15 e você já começa.</p>
         </div>
-      </section>
+        <a class="btn primary"
+           href="https://wa.me/5511934929066?text=Quero%20ativar%20o%20ConSySencI.A%20N%C3%ADvel%201%20(R%2415).%20Me%20manda%20o%20passo%20a%20passo%20e%20o%20login."
+           rel="noopener">
+          Ativar no WhatsApp
+        </a>
+      </div>
+    </section>
 
-      <!-- COMO FUNCIONA -->
-      <section id="como-funciona" class="fade-in" style="animation-delay:.18s">
-        <h3 class="section-title">Como funciona na prática</h3>
-        <p class="section-sub">
-          O Nível 1 não é “curso gigante”. É <b>um começo inteligente</b>:
-          você ativa a base, aprende o fluxo e coloca o sistema pra rodar no seu ritmo.
-        </p>
+    <footer>
+      © <span id="y"></span> ConSySencI.A — Sistema Vivo de Vendas Automáticas
+    </footer>
+  </main>
 
-        <div class="steps">
-          <div class="step">
-            <div class="n">1</div>
-            <h4>Ative e configure</h4>
-            <p>Você recebe a estrutura inicial e um passo a passo direto para deixar tudo funcionando.</p>
-          </div>
-          <div class="step">
-            <div class="n">2</div>
-            <h4>Comece a operar</h4>
-            <p>Você aplica o primeiro modo de venda no WhatsApp com um fluxo simples (sem depender de “guru”).</p>
-          </div>
-          <div class="step">
-            <div class="n">3</div>
-            <h4>Valide e evolua</h4>
-            <p>Conforme você aprende e ganha confiança, o sistema “evolui” com você, liberando próximos passos.</p>
-          </div>
-          <div class="step">
-            <div class="n">4</div>
-            <h4>Suba de nível</h4>
-            <p>Quando estiver pronto, você sobe para o Nível 2 e aumenta a capacidade de conversão e escala.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- GARANTIA / SEGURANÇA -->
-      <section class="fade-in" style="animation-delay:.22s">
-        <h3 class="section-title">Simplicidade e clareza</h3>
-        <p class="section-sub">
-          A proposta aqui é direta: você começa pequeno, testa, ganha confiança e só depois avança.
-          Sem “milagre”, sem poluir sua cabeça — <b>execução primeiro</b>.
-        </p>
-      </section>
-
-      <!-- FAQ -->
-      <section class="fade-in" style="animation-delay:.26s">
-        <h3 class="section-title">Perguntas rápidas</h3>
-        <p class="section-sub">Se ainda estiver com dúvida, dá uma olhada aqui:</p>
-
-        <div class="faq">
-          <details>
-            <summary>
-              É só R$10 mesmo?
-              <svg class="chev" viewBox="0 0 24 24" fill="none">
-                <path d="M6 9l6 6 6-6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </summary>
-            <p>Sim. É o Nível 1 (ativação). A ideia é você entrar barato, entender e validar antes de subir de nível.</p>
-          </details>
-
-          <details>
-            <summary>
-              Vou receber acesso na hora?
-              <svg class="chev" viewBox="0 0 24 24" fill="none">
-                <path d="M6 9l6 6 6-6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </summary>
-            <p>Sim. Após a compra, o acesso é liberado automaticamente pela plataforma.</p>
-          </details>
-
-          <details>
-            <summary>
-              Preciso investir em tráfego pago?
-              <svg class="chev" viewBox="0 0 24 24" fill="none">
-                <path d="M6 9l6 6 6-6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </summary>
-            <p>Não. O Nível 1 é focado em começar com o que você já tem: WhatsApp, execução e consistência.</p>
-          </details>
-
-          <details>
-            <summary>
-              Isso é um “curso enorme”?
-              <svg class="chev" viewBox="0 0 24 24" fill="none">
-                <path d="M6 9l6 6 6-6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </summary>
-            <p>Não. É um caminho curto, prático e organizado — com foco em ativar e rodar o primeiro ciclo.</p>
-          </details>
-        </div>
-      </section>
-
-      <!-- CTA FINAL -->
-      <section class="final fade-in" style="animation-delay:.30s">
-        <div class="card">
-          <div>
-            <h3>Pronto pra ativar e começar hoje?</h3>
-            <p>Comece com R$10, rode o primeiro ciclo e avance com segurança — sem pular etapas.</p>
-          </div>
-          <a class="btn primary" href="https://pay.kiwify.com.br/apT0zgS" rel="noopener">Ativar agora</a>
-        </div>
-      </section>
-
-      <footer>
-        © <span id="y"></span> ConSySencI.A — Todos os direitos reservados
-      </footer>
-    </main>
+  <!-- Sticky bar (mobile conversion) -->
+  <div class="stickybar" role="region" aria-label="Ativação rápida">
+    <div class="inner">
+      <div class="meta">
+        <b>Nível 1 por R$15</b>
+        <span>Chama no WhatsApp e ativa em minutos</span>
+      </div>
+      <a class="btn primary"
+         href="https://wa.me/5511934929066?text=Quero%20ativar%20o%20ConSySencI.A%20N%C3%ADvel%201%20(R%2415).%20Me%20manda%20o%20passo%20a%20passo%20%2B%20login%20e%20senha."
+         rel="noopener">
+        Ativar
+      </a>
+    </div>
   </div>
 
   <script>
-    // JS mínimo e seguro (não esconde conteúdo, só utilidade)
     document.getElementById("y").textContent = new Date().getFullYear();
   </script>
 </body>
-</html>
+  </html>
+      
